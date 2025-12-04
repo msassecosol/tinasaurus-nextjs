@@ -1,4 +1,4 @@
-import { defineConfig } from "tinacms";
+import { defineConfig, LocalAuthProvider } from "tinacms";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -21,11 +21,7 @@ export default defineConfig({
   contentApiUrlOverride: "/api/tina/gql",
 
   // Self-hosted auth configuration
-  admin: {
-    auth: {
-      useLocalAuth: true,
-    },
-  },
+  authProvider: new LocalAuthProvider(),
 
   build: {
     outputFolder: "admin",

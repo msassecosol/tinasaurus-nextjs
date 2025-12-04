@@ -1,5 +1,5 @@
 // tina/config.ts
-import { defineConfig } from "tinacms";
+import { defineConfig, LocalAuthProvider } from "tinacms";
 var branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
 var isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 var config_default = defineConfig({
@@ -11,11 +11,7 @@ var config_default = defineConfig({
   // For self-hosted, point to the local API
   contentApiUrlOverride: "/api/tina/gql",
   // Self-hosted auth configuration
-  admin: {
-    auth: {
-      useLocalAuth: true
-    }
-  },
+  authProvider: new LocalAuthProvider(),
   build: {
     outputFolder: "admin",
     publicFolder: "public"
