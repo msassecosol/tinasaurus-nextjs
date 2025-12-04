@@ -1,12 +1,15 @@
 // tina/config.ts
 import { defineConfig } from "tinacms";
 var branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
+var isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 var config_default = defineConfig({
   branch,
   // Get this from tina.io
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
   // Get this from tina.io
   token: process.env.TINA_TOKEN,
+  // For self-hosted, point to the local API
+  contentApiUrlOverride: "/api/tina/gql",
   build: {
     outputFolder: "admin",
     publicFolder: "public"

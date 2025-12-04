@@ -1,28 +1,26 @@
 
 import { createDatabase, createLocalDatabase } from '@tinacms/datalayer'
-import { GitHubProvider } from 'tinacms-gitprovider-github'
 import { MongodbLevel } from 'mongodb-level'
+import { MyGitProvider } from './MyGitProvider'
 
 const branch = (process.env.GITHUB_BRANCH ||
   process.env.VERCEL_GIT_COMMIT_REF ||
   process.env.HEAD ||
   "main")
 
-const isLocal =  process.env.TINA_PUBLIC_IS_LOCAL === 'true'
+const isLocal = false;// process.env.TINA_PUBLIC_IS_LOCAL === 'true'
 
 export default isLocal
   ? createLocalDatabase()
   : createDatabase({
-      gitProvider: new GitHubProvider({
-          branch,
-          owner: process.env.GITHUB_OWNER,
-          repo: process.env.GITHUB_REPO,
-          token: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
+      gitProvider: new MyGitProvider({
+          branch: 'test',
+          commitMessage: 'Edited with TinaCMS',
         }),
       databaseAdapter: new MongodbLevel({
           collectionName: 'tinacms',
           dbName: 'tinacms',
-          mongoUri: process.env.MONGODB_URI,
+          mongoUri: 'mongodb://admin:admin@localhost:27017/',
         }),
       namespace: branch,
     })

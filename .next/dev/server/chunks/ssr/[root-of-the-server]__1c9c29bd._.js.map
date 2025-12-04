@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/milan/source/repos/playgrouds/TinaCMS/tina-be/pages/index.tsx"],"sourcesContent":["import Link from \"next/link\";\r\n\r\nexport default function Home() {\r\n  return (\r\n    <main style={{ padding: \"2rem\", fontFamily: \"system-ui, sans-serif\" }}>\r\n      <h1>TinaCMS Backend</h1>\r\n      <p>Your TinaCMS self-hosted backend is ready!</p>\r\n      <nav style={{ marginTop: \"1rem\" }}>\r\n        <ul>\r\n          <li>\r\n            <Link href=\"/admin\">Go to TinaCMS Admin</Link>\r\n          </li>\r\n          <li>\r\n            <Link href=\"/demo/blog/hello-world\">View Demo Blog Post</Link>\r\n          </li>\r\n        </ul>\r\n      </nav>\r\n    </main>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,qBACE,qKAAC;QAAK,OAAO;YAAE,SAAS;YAAQ,YAAY;QAAwB;;0BAClE,qKAAC;0BAAG;;;;;;0BACJ,qKAAC;0BAAE;;;;;;0BACH,qKAAC;gBAAI,OAAO;oBAAE,WAAW;gBAAO;0BAC9B,cAAA,qKAAC;;sCACC,qKAAC;sCACC,cAAA,qKAAC,gIAAI;gCAAC,MAAK;0CAAS;;;;;;;;;;;sCAEtB,qKAAC;sCACC,cAAA,qKAAC,gIAAI;gCAAC,MAAK;0CAAyB;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAMhD"}}]
-}

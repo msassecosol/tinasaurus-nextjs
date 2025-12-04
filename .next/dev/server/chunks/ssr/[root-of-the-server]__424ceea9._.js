@@ -172,7 +172,7 @@ const generateRequester = (client)=>{
     return requester;
 };
 const ExperimentalGetTinaClient = ()=>getSdk(generateRequester((0, __TURBOPACK__imported__module__$5b$externals$5d2f$tinacms$2f$dist$2f$client__$5b$external$5d$__$28$tinacms$2f$dist$2f$client$2c$__esm_import$29$__["createClient"])({
-        url: "http://localhost:4001/graphql",
+        url: "/api/tina/gql",
         queries
     })));
 const queries = (client)=>{
@@ -181,18 +181,62 @@ const queries = (client)=>{
 };
 __turbopack_async_result__();
 } catch(e) { __turbopack_async_result__(e); } }, false);}),
-"[externals]/tinacms-gitprovider-github [external] (tinacms-gitprovider-github, cjs)", ((__turbopack_context__, module, exports) => {
-
-const mod = __turbopack_context__.x("tinacms-gitprovider-github", () => require("tinacms-gitprovider-github"));
-
-module.exports = mod;
-}),
 "[externals]/mongodb-level [external] (mongodb-level, cjs)", ((__turbopack_context__, module, exports) => {
 
 const mod = __turbopack_context__.x("mongodb-level", () => require("mongodb-level"));
 
 module.exports = mod;
 }),
+"[externals]/simple-git [external] (simple-git, esm_import)", ((__turbopack_context__) => {
+"use strict";
+
+return __turbopack_context__.a(async (__turbopack_handle_async_dependencies__, __turbopack_async_result__) => { try {
+
+const mod = await __turbopack_context__.y("simple-git");
+
+__turbopack_context__.n(mod);
+__turbopack_async_result__();
+} catch(e) { __turbopack_async_result__(e); } }, true);}),
+"[project]/tina/MyGitProvider.ts [ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+return __turbopack_context__.a(async (__turbopack_handle_async_dependencies__, __turbopack_async_result__) => { try {
+
+__turbopack_context__.s([
+    "MyGitProvider",
+    ()=>MyGitProvider
+]);
+var __TURBOPACK__imported__module__$5b$externals$5d2f$simple$2d$git__$5b$external$5d$__$28$simple$2d$git$2c$__esm_import$29$__ = __turbopack_context__.i("[externals]/simple-git [external] (simple-git, esm_import)");
+var __turbopack_async_dependencies__ = __turbopack_handle_async_dependencies__([
+    __TURBOPACK__imported__module__$5b$externals$5d2f$simple$2d$git__$5b$external$5d$__$28$simple$2d$git$2c$__esm_import$29$__
+]);
+[__TURBOPACK__imported__module__$5b$externals$5d2f$simple$2d$git__$5b$external$5d$__$28$simple$2d$git$2c$__esm_import$29$__] = __turbopack_async_dependencies__.then ? (await __turbopack_async_dependencies__)() : __turbopack_async_dependencies__;
+;
+class MyGitProvider {
+    git;
+    commitMessage;
+    constructor(options = {}){
+        const rootPath = options.rootPath || process.cwd();
+        this.commitMessage = options.commitMessage || 'Edited with TinaCMS';
+        this.git = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$simple$2d$git__$5b$external$5d$__$28$simple$2d$git$2c$__esm_import$29$__["default"])(rootPath);
+    }
+    async onPut(key, value) {
+        // Stage and commit the file (file is already written by TinaCMS)
+        await this.git.add(key);
+        await this.git.commit(this.commitMessage, [
+            key
+        ]);
+    }
+    async onDelete(key) {
+        // Remove the file from git and commit
+        await this.git.rm(key);
+        await this.git.commit(this.commitMessage, [
+            key
+        ]);
+    }
+}
+__turbopack_async_result__();
+} catch(e) { __turbopack_async_result__(e); } }, false);}),
 "[project]/tina/database.ts [ssr] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
@@ -203,28 +247,27 @@ __turbopack_context__.s([
     ()=>__TURBOPACK__default__export__
 ]);
 var __TURBOPACK__imported__module__$5b$externals$5d2f40$tinacms$2f$datalayer__$5b$external$5d$__$2840$tinacms$2f$datalayer$2c$__esm_import$29$__ = __turbopack_context__.i("[externals]/@tinacms/datalayer [external] (@tinacms/datalayer, esm_import)");
-var __TURBOPACK__imported__module__$5b$externals$5d2f$tinacms$2d$gitprovider$2d$github__$5b$external$5d$__$28$tinacms$2d$gitprovider$2d$github$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/tinacms-gitprovider-github [external] (tinacms-gitprovider-github, cjs)");
 var __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb$2d$level__$5b$external$5d$__$28$mongodb$2d$level$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/mongodb-level [external] (mongodb-level, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$tina$2f$MyGitProvider$2e$ts__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/tina/MyGitProvider.ts [ssr] (ecmascript)");
 var __turbopack_async_dependencies__ = __turbopack_handle_async_dependencies__([
-    __TURBOPACK__imported__module__$5b$externals$5d2f40$tinacms$2f$datalayer__$5b$external$5d$__$2840$tinacms$2f$datalayer$2c$__esm_import$29$__
+    __TURBOPACK__imported__module__$5b$externals$5d2f40$tinacms$2f$datalayer__$5b$external$5d$__$2840$tinacms$2f$datalayer$2c$__esm_import$29$__,
+    __TURBOPACK__imported__module__$5b$project$5d2f$tina$2f$MyGitProvider$2e$ts__$5b$ssr$5d$__$28$ecmascript$29$__
 ]);
-[__TURBOPACK__imported__module__$5b$externals$5d2f40$tinacms$2f$datalayer__$5b$external$5d$__$2840$tinacms$2f$datalayer$2c$__esm_import$29$__] = __turbopack_async_dependencies__.then ? (await __turbopack_async_dependencies__)() : __turbopack_async_dependencies__;
+[__TURBOPACK__imported__module__$5b$externals$5d2f40$tinacms$2f$datalayer__$5b$external$5d$__$2840$tinacms$2f$datalayer$2c$__esm_import$29$__, __TURBOPACK__imported__module__$5b$project$5d2f$tina$2f$MyGitProvider$2e$ts__$5b$ssr$5d$__$28$ecmascript$29$__] = __turbopack_async_dependencies__.then ? (await __turbopack_async_dependencies__)() : __turbopack_async_dependencies__;
 ;
 ;
 ;
 const branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
-const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === 'true';
-const __TURBOPACK__default__export__ = isLocal ? (0, __TURBOPACK__imported__module__$5b$externals$5d2f40$tinacms$2f$datalayer__$5b$external$5d$__$2840$tinacms$2f$datalayer$2c$__esm_import$29$__["createLocalDatabase"])() : (0, __TURBOPACK__imported__module__$5b$externals$5d2f40$tinacms$2f$datalayer__$5b$external$5d$__$2840$tinacms$2f$datalayer$2c$__esm_import$29$__["createDatabase"])({
-    gitProvider: new __TURBOPACK__imported__module__$5b$externals$5d2f$tinacms$2d$gitprovider$2d$github__$5b$external$5d$__$28$tinacms$2d$gitprovider$2d$github$2c$__cjs$29$__["GitHubProvider"]({
-        branch,
-        owner: process.env.GITHUB_OWNER,
-        repo: process.env.GITHUB_REPO,
-        token: process.env.GITHUB_PERSONAL_ACCESS_TOKEN
+const isLocal = false; // process.env.TINA_PUBLIC_IS_LOCAL === 'true'
+const __TURBOPACK__default__export__ = ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : (0, __TURBOPACK__imported__module__$5b$externals$5d2f40$tinacms$2f$datalayer__$5b$external$5d$__$2840$tinacms$2f$datalayer$2c$__esm_import$29$__["createDatabase"])({
+    gitProvider: new __TURBOPACK__imported__module__$5b$project$5d2f$tina$2f$MyGitProvider$2e$ts__$5b$ssr$5d$__$28$ecmascript$29$__["MyGitProvider"]({
+        branch: 'test',
+        commitMessage: 'Edited with TinaCMS'
     }),
     databaseAdapter: new __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb$2d$level__$5b$external$5d$__$28$mongodb$2d$level$2c$__cjs$29$__["MongodbLevel"]({
         collectionName: 'tinacms',
         dbName: 'tinacms',
-        mongoUri: process.env.MONGODB_URI
+        mongoUri: 'mongodb://admin:admin@localhost:27017/'
     }),
     namespace: branch
 });
@@ -717,4 +760,4 @@ module.exports = mod;
 }),
 ];
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__4ab44219._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__424ceea9._.js.map

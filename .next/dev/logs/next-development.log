@@ -1,8 +1,7 @@
-[00:00:01.001] Server  LOG      ✓ Ready in 633ms
-[00:08:12.279] Server  LOG        Reload env: .env
-[00:17:08.536] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css"). Use Document instead. 
+[00:00:01.037] Server  LOG      ✓ Ready in 661ms
+[00:00:14.198] Server  WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:17:08.698] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css"). Use Document instead. 
+[00:00:16.407] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
-[00:22:38.391] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css"). Use Document instead. 
+[00:00:36.233] Browser WARN    Do not add stylesheets using next/head (see <link rel="stylesheet"> tag with href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css"). Use Document instead. 
 See more info here: https://nextjs.org/docs/messages/no-stylesheets-in-head-component
