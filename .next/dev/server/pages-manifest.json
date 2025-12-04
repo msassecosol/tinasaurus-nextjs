@@ -1,5 +1,1 @@
-{
-  "/_app": "pages/_app.js",
-  "/_document": "pages/_document.js",
-  "/demo/blog/[filename]": "pages/demo/blog/[filename].js"
-}
+{}

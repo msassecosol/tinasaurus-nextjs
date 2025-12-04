@@ -1,7 +1,4 @@
 self.__BUILD_MANIFEST = {
-  "/demo/blog/[filename]": [
-    "static/chunks/pages/demo/blog/[filename].js"
-  ],
   "__rewrites": {
     "afterFiles": [
       {
