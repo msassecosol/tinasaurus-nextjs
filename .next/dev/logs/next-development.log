@@ -1,4 +1,1 @@
-[00:00:01.000] Server  LOG      ✓ Ready in 633ms
-[00:00:43.433] Server  LOG     MyGitProvider constructor called with rootPath: "C:\\Users\\milan\\source\\repos\\playgrouds\\TinaCMS\\tina-be"
-[00:01:25.476] Server  LOG     MyGitProvider onPut called for key: "content/posts/hello-world.md"
-[00:01:25.677] Server  LOG     No changes to commit for key: "content/posts/hello-world.md"
+[00:00:01.080] Server  LOG      ✓ Ready in 676ms
