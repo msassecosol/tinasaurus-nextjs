@@ -12,11 +12,6 @@ const isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 export default defineConfig({
   branch,
 
-  // // Get this from tina.io
-  // clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-  // // Get this from tina.io
-  // token: process.env.TINA_TOKEN,
-
   // For self-hosted, point to the local API
   contentApiUrlOverride: "/api/tina/gql",
 
