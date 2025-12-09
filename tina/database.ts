@@ -14,7 +14,7 @@ export default isLocal
   ? createLocalDatabase()
   : createDatabase({
       gitProvider: new MyGitProvider({
-          branch: 'test',
+          branch: 'main',
           commitMessage: 'Edited with TinaCMS',
         }),
       databaseAdapter: new MongodbLevel({
