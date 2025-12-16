@@ -6,6 +6,7 @@ export interface OpenIDBackendAuthConfig {
   clientSecret: string;
   tokenUrl: string;
   userInfoUrl: string;
+  isInRoleApiUrl: string;
   authorizedEmails?: string[]; // Optional: restrict access to specific emails
   authorizedDomains?: string[]; // Optional: restrict access to specific email domains
 }
@@ -34,12 +35,6 @@ export const OpenIDBackendAuthProvider = (
     ): Promise<
       { isAuthorized: true } | { isAuthorized: false; errorMessage: string; errorCode: number }
     > {
-      return {
-            isAuthorized: false,
-            errorMessage: "User not authorized to access TinaCMS",
-            errorCode: 403,
-          }
-
       try {
         const token = extractTokenFromRequest(req);
         if (!token) {
@@ -61,7 +56,7 @@ export const OpenIDBackendAuthProvider = (
         }
 
         // Check authorization rules
-        if (!isUserAuthorized(userInfo, config)) {
+        if (!(await isUserAuthorized(token, config, "ASOL-Documentation-AP-.Editor"))) {
           return {
             isAuthorized: false,
             errorMessage: "User not authorized to access TinaCMS",
@@ -121,32 +116,53 @@ async function validateToken(
   }
 }
 
+
+
 /**
  * Check if user is authorized based on email/domain restrictions
  */
-function isUserAuthorized(
-  userInfo: any,
-  config: OpenIDBackendAuthConfig
-): boolean {
-  return false;
-  const email = userInfo.email || userInfo["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"];
-  if (!email) {
-    return false;
+async function isUserAuthorized(
+  token: string,
+  config: OpenIDBackendAuthConfig,
+  roleCode: string
+): Promise<boolean> {
+  
+  const url = new URL(config.isInRoleApiUrl);
+  url.searchParams.append('roleCode', roleCode);
+  
+  const response = await fetch(url.toString(), {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  
+  if (!response.ok) {
+    console.error(`isInRole API failed: ${response.statusText}`);
+     return false;
   }
+  
+  const result = await response.json();
+  return result.accessGranted ?? false;
 
-  // If specific emails are configured, check if user's email is in the list
-  if (config.authorizedEmails && config.authorizedEmails.length > 0) {
-    return config.authorizedEmails.includes(email.toLowerCase());
-  }
 
-  // If specific domains are configured, check if user's email domain is in the list
-  if (config.authorizedDomains && config.authorizedDomains.length > 0) {
-    const domain = email.split("@")[1]?.toLowerCase();
-    return domain ? config.authorizedDomains.includes(domain) : false;
-  }
+  // const email = userInfo.email || userInfo["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"];
+  // if (!email) {
+  //   return false;
+  // }
 
-  // If no restrictions are configured, allow any authenticated user
-  return true;
+  // // If specific emails are configured, check if user's email is in the list
+  // if (config.authorizedEmails && config.authorizedEmails.length > 0) {
+  //   return config.authorizedEmails.includes(email.toLowerCase());
+  // }
+
+  // // If specific domains are configured, check if user's email domain is in the list
+  // if (config.authorizedDomains && config.authorizedDomains.length > 0) {
+  //   const domain = email.split("@")[1]?.toLowerCase();
+  //   return domain ? config.authorizedDomains.includes(domain) : false;
+  // }
+
+  // // If no restrictions are configured, allow any authenticated user
+  // return true;
 }
 
 /**
@@ -157,6 +173,7 @@ export function createOpenIDBackendAuthProviderFromEnv(): BackendAuthProvider {
   const clientSecret = '';
   const tokenUrl = 'https://alpha.avaplace.com/api/asol/idp/connect/token';
   const userInfoUrl = 'https://alpha.avaplace.com/api/asol/idp/connect/userinfo';
+  const isInRoleApiUrl = 'https://alpha.avaplace.com/api/asol/idm/api/v1/Authorization/IsInRole';
 
   if (!clientId || !tokenUrl || !userInfoUrl) {
     throw new Error(
@@ -177,6 +194,7 @@ export function createOpenIDBackendAuthProviderFromEnv(): BackendAuthProvider {
     clientSecret,
     tokenUrl,
     userInfoUrl,
+    isInRoleApiUrl,
     authorizedEmails,
     authorizedDomains,
   });
