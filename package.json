@@ -16,7 +16,7 @@
     "tinacms-gitprovider-github": "^4.0.0"
   },
   "scripts": {
-    "dev": "cross-env TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev\"",
+    "dev": "tinacms dev -c \"next dev\"",
     "build": "tinacms build && next build",
     "setup:users": "tinacms-next-auth setup"
   },

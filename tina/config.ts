@@ -1,4 +1,5 @@
 import { defineConfig, LocalAuthProvider } from "tinacms";
+import { OpenIDAuthProvider } from "./OpenIDAuthProvider";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -16,7 +17,17 @@ export default defineConfig({
   contentApiUrlOverride: "/api/tina/gql",
 
   // Self-hosted auth configuration
-  authProvider: new LocalAuthProvider(),
+  authProvider: isLocal
+    ? new LocalAuthProvider()
+    : new OpenIDAuthProvider({
+        clientId: 'plaza-frontend',
+        authorizeUrl: 'https://alpha.avaplace.com/api/asol/idp/connect/authorize',
+        tokenUrl: 'https://alpha.avaplace.com/api/asol/idp/connect/token',
+        userInfoUrl: 'https://alpha.avaplace.com/api/asol/idp/connect/userinfo',
+        redirectUri: 'http://localhost:3000/admin',
+        scope: 'openid profile email',
+        logoutUrl: 'http://localhost:3000/',
+      }),
 
   build: {
     outputFolder: "admin",
