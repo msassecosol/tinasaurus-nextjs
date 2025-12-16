@@ -2,6 +2,7 @@ import type { GitProvider } from '@tinacms/graphql'
 import simpleGit, { SimpleGit } from 'simple-git'
 import * as fs from 'fs'
 import * as path from 'path'
+import { requestContext } from './userContext'
 
 export interface MyGitProviderOptions {
   rootPath?: string
@@ -24,6 +25,9 @@ export class MyGitProvider implements GitProvider {
   }
 
   async onPut(key: string, value: string) {
+    const userInfo = requestContext.getStore()?.useInfo;
+
+    console.log('User info in onPut:', userInfo);
     console.log('MyGitProvider onPut called for key:', key)
     
     // Ensure we're on the correct branch
